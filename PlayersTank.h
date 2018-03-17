@@ -7,7 +7,7 @@ class PlayersTank :
 {
 public:
 	void rotate() = delete;
-	void control();
+	void control(int bottonn);
 	PlayersTank(int posX, int posY);
 	PlayersTank(const PlayersTank& tank);
 	PlayersTank& operator=(const PlayersTank& tank);

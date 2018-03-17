@@ -6,6 +6,7 @@ class Shell :
 	friend class GameField;
 	friend class Tank;
 public:
+	Shell();
 	Shell(int posX, int posY, int directionX, int directionY);
 	Shell(const Shell& shell);
 	Shell& operator=(const Shell& shell);

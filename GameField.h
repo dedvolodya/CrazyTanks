@@ -9,6 +9,8 @@ public:
 	void drawObject(const GameObject& obj);
 	void deleteObject(const GameObject& obj);
 	bool isBarrier(const GameObject& obj);
+	int getSizeX();
+	int getSizeY();
 	~GameField();
 	void print() const;
 private:	

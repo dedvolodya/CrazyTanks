@@ -15,9 +15,10 @@ GameObject::GameObject(const GameObject& obj) {
 	if (this == &obj)
 		return;
 
-	for (int i = 0; i < sizeY_; i++)
-		delete[] body_[i];
-	delete[] body_;
+	//for (int i = 0; i < sizeY_; i++)
+	//	delete[] body_[i];
+	//if (body_ != NULL)
+	//	delete[] body_;
 
 	body_ = new char*[obj.sizeY_];
 	for (int i = 0; i < obj.sizeY_; i++)

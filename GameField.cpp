@@ -9,7 +9,11 @@ GameField::GameField(int sizeX,int sizeY)
 
 	for (int i = 0; i < sizeY; i++)
 		for (int j = 0; j < sizeX; j++)
-			field_[i][j] = ' ';
+			if (i == 0 || j == 0 ||
+				i == sizeY - 1 || j == sizeX - 1)
+				field_[i][j] = 'N';
+			else 
+				field_[i][j] = ' ';
 
 	sizeX_ = sizeX;
 	sizeY_ = sizeY;
@@ -85,4 +89,10 @@ bool GameField::isBarrier(const GameObject& obj) {
 					return true;
 	}
 	return false;
+}
+int GameField::getSizeX() {
+	return sizeX_;
+}
+int GameField::getSizeY() {
+	return sizeY_;
 }

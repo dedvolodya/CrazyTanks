@@ -1,6 +1,8 @@
 #include "Shell.h"
 
+Shell::Shell() : GameObject(0,0,0,0) {
 
+}
 Shell::Shell(int posX, int posY, int directionX, int directionY) 
 	: GameObject(posX, posY, 1, 1)
 {
