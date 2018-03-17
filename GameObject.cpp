@@ -6,6 +6,7 @@ GameObject::GameObject(int posX, int posY, int sizeX, int sizeY)
 	posY_ = posY;
 	sizeX_ = sizeX;
 	sizeY_ = sizeY;
+	vector[0] = vector[1] = 0;
 	body_ = new char*[sizeY_];
 	for (int i = 0; i < sizeY_; i++)
 		body_[i] = new char[sizeX_];
@@ -26,6 +27,8 @@ GameObject::GameObject(const GameObject& obj) {
 	sizeY_ = obj.sizeY_;
 	posX_ = obj.posX_;
 	posY_ = obj.posY_;
+	vector[0] = obj.vector[0];
+	vector[1] = obj.vector[1];
 
 	for (int i = 0; i < sizeY_; i++)
 		for (int j = 0; j < sizeX_; j++)
@@ -49,6 +52,8 @@ GameObject& GameObject::operator=(const GameObject& obj) {
 	posX_ = obj.posX_;
 	posY_ = obj.posY_;
 
+	vector[0] = obj.vector[0];
+	vector[1] = obj.vector[1];
 	for (int i = 0; i < sizeY_; i++)
 		for (int j = 0; j < sizeX_; j++)
 			body_[i][j] = obj.body_[i][j];

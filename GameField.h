@@ -9,7 +9,7 @@ public:
 	GameField(int sizeX, int sizeY);
 	void drawObject(const GameObject& obj);
 	void deleteObject(const GameObject& obj);
-	bool isBarrier(const Tank& tank);
+	bool isBarrier(const GameObject& tank);
 	~GameField();
 	void print() const;
 private:	

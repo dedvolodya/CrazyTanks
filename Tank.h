@@ -5,16 +5,15 @@
 class Tank : public GameObject
 {
 	friend class GameField;
-protected:
-	int helth_;
-	int vector[2];//direction vector
 public:
-	Shell shoot();
-	bool isDead();
+	Shell shoot() const;
+	bool isDead() const;
 	void move();
 	void rotate();
 	Tank(int posX, int posY, int helth);
 	Tank(const Tank& tank);
 	Tank& operator=(const Tank& tank);
 	~Tank();
+protected:
+	int helth_;
 };

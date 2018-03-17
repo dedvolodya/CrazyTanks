@@ -9,15 +9,13 @@ Shell::Shell(int posX, int posY, int directionX, int directionY)
 	vector[1] = 2 * directionY; 
 }
 Shell::Shell(const Shell& shell) : GameObject(shell) {
-	vector[0] = shell.vector[0];
-	vector[1] = shell.vector[1];
+
 }
 Shell& Shell::operator=(const Shell& shell) {
 	if (this == &shell)
 		return *this;
 	GameObject::operator=(shell);
-	vector[0] = shell.vector[0];
-	vector[1] = shell.vector[1];
+
 	return *this;
 }
 Shell::~Shell()

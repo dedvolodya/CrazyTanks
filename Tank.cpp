@@ -10,8 +10,6 @@ Tank::Tank(int posX, int posY, int helth)
 }
 Tank::Tank(const Tank& tank) : 
 	GameObject(tank) {
-	vector[0] = tank.vector[0];
-	vector[1] = tank.vector[1];
 	helth_ = tank.helth_;
 }
 Tank& Tank::operator=(const Tank& tank) {
@@ -19,8 +17,6 @@ Tank& Tank::operator=(const Tank& tank) {
 		return *this;
 
 	GameObject::operator=(tank);
-	vector[0] = tank.vector[0];
-	vector[1] = tank.vector[1];
 	helth_ = tank.helth_;
 	return *this;
 }
@@ -35,9 +31,9 @@ void Tank::rotate() {
 	vector[0] = -vector[0];
 	vector[1] = -vector[1];
 }
-bool Tank::isDead() {
+bool Tank::isDead() const {
 	return (helth_ == 0);
 }
-Shell Tank::shoot() {
+Shell Tank::shoot() const {
 	return Shell(posX_ + 2, posY_ + 1, vector[0], vector[1]);
 }
