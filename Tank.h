@@ -1,14 +1,15 @@
 #pragma once
 #include "GameObject.h"
+#include "Shell.h"
 
 class Tank : public GameObject
 {
 	friend class GameField;
 protected:
 	int helth_;
-	int vector[2];//direct vector
+	int vector[2];//direction vector
 public:
-	void shoot();
+	Shell shoot();
 	bool isDead();
 	void move();
 	void rotate();

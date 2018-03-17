@@ -1,6 +1,8 @@
 #include"GameField.h"
 #include"EnemyTank.h"
 #include"Shell.h"
+#include"PlayersTank.h"
+#include"Wall.h"
 
 #include<chrono>
 #include<thread>
@@ -16,24 +18,24 @@ int main()
 	EnemyTank tank(3, 5);
 	EnemyTank tank1(10, 5);
 	EnemyTank tank2(20, 1);
-	Shell shell(0, 0, 1, 0);
-
+	Shell shell(0, 0, 0, 0);
+	PlayersTank player(45,25);
+	Wall wall(3, 4, 10, Wall::GORIZONTAL);
 	while (true) {
-		field.drawObject(tank);
+		field.drawObject(wall);
 		field.drawObject(tank1);
 		field.drawObject(tank2);
 		field.drawObject(shell);
+		field.drawObject(player);
 		field.print();
 		std::this_thread::sleep_for(std::chrono::microseconds(100000));
-		if (_kbhit()) {
-			tank.rotate();
-			getch();
-			getch();
-		}
+		field.deleteObject(player);
+		player.control();
 		field.deleteObject(shell);
-		field.deleteObject(tank);
+		//field.deleteObject(wall);
 		field.deleteObject(tank1);
 		field.deleteObject(tank2);
+		
 		tank.move();
 		tank1.move();
 		tank2.move();

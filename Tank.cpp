@@ -1,6 +1,7 @@
 #include "Tank.h"
 
-Tank::Tank(int posX, int posY, int helth) : GameObject(posX, posY, 5, 3)
+Tank::Tank(int posX, int posY, int helth) 
+	: GameObject(posX, posY, 5, 3)
 {
 	srand(time(NULL));
 	vector[0] = rand() % 2;
@@ -20,4 +21,7 @@ void Tank::rotate() {
 }
 bool Tank::isDead() {
 	return (helth_ == 0);
+}
+Shell Tank::shoot() {
+	return Shell(posX_ + 2, posY_ + 1, vector[0], vector[1]);
 }
