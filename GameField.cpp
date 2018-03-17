@@ -37,3 +37,52 @@ void GameField::drawObject(const GameObject& obj) {
 		for (int j = obj.posX_; j < obj.posX_ + obj.sizeX_; j++)
 			field_[i][j] = obj.body_[i - obj.posY_][j - obj.posX_];
 }
+bool GameField::isBarrier(const GameObject& obj) {
+	int startCheckingPosX;
+	int startCheckingPosY;
+	if (obj.vector[0] > 0) {
+		if ((obj.posX_ + obj.sizeX_ + obj.vector[0]) > sizeX_)
+			return true;
+
+		startCheckingPosX = obj.posX_ + obj.sizeX_;
+		startCheckingPosY = obj.posY_;
+		for (int i = startCheckingPosX; i < startCheckingPosX + obj.vector[0]; i++)
+			for (int j = startCheckingPosY; j < startCheckingPosY + obj.sizeY_; j++)
+				if (field_[j][i] != ' ')
+					return true;
+	}
+	if (obj.vector[0] < 0) {
+		if (obj.posX_  <= 0)
+			return true;
+
+		startCheckingPosX = obj.posX_- 1;
+		startCheckingPosY = obj.posY_;
+		for (int i = startCheckingPosX; i > startCheckingPosX + obj.vector[0]; i--)
+			for (int j = startCheckingPosY; j < startCheckingPosY + obj.sizeY_; j++)
+				if (field_[j][i] != ' ')
+					return true;
+	}
+	if (obj.vector[1] < 0) {
+		if (obj.posY_ <= 0)
+			return true;
+
+		startCheckingPosX = obj.posX_;
+		startCheckingPosY = obj.posY_ - 1;
+		for (int i = startCheckingPosX; i < startCheckingPosX + obj.sizeX_; i++)
+			for (int j = startCheckingPosY; j > startCheckingPosY + obj.vector[1]; j--)
+				if (field_[j][i] != ' ')
+					return true;
+	}
+	if (obj.vector[1] > 0) {
+		if (obj.posY_ + obj.sizeY_ + obj.vector[1] > sizeY_)
+			return true;
+
+		startCheckingPosX = obj.posX_;
+		startCheckingPosY = obj.posY_ + obj.sizeY_;
+		for (int i = startCheckingPosX; i < startCheckingPosX + obj.sizeX_; i++)
+			for (int j = startCheckingPosY; j < startCheckingPosY + obj.vector[1]; j++)
+				if (field_[j][i] != ' ')
+					return true;
+	}
+	return false;
+}

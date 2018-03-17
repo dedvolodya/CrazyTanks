@@ -13,6 +13,7 @@ public:
 	Tank(int posX, int posY, int helth);
 	Tank(const Tank& tank);
 	Tank& operator=(const Tank& tank);
+	bool isWounded(const Shell& shell);
 	~Tank();
 protected:
 	int helth_;

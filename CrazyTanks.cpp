@@ -15,32 +15,32 @@ int main()
 {
 	GameField field(90, 28);
 	
-	EnemyTank tank(3, 5);
+	EnemyTank tank(25, 15);
 	EnemyTank tank1(10, 5);
 	EnemyTank tank2(20, 1);
-	Shell shell(0, 0, 0, 0);
+	Shell shell(20, 26, 1, 0);
 	PlayersTank player(45,25);
-	Wall wall(3, 4, 10, Wall::GORIZONTAL);
-	shell = tank1.shoot();
+	Wall wall(22, 7, 10, Wall::GORIZONTAL);
+	//shell = tank1.shoot();
 	while (true) {
 		field.drawObject(wall);
-		field.drawObject(tank1);
-		field.drawObject(tank2);
-		field.drawObject(shell);
+		field.drawObject(tank);
 		field.drawObject(player);
+		field.drawObject(shell);
 		field.print();
-		std::this_thread::sleep_for(std::chrono::microseconds(100000));
-		field.deleteObject(player);
-		player.control();
+		std::this_thread::sleep_for(std::chrono::microseconds(10000));
+		if (field.isBarrier(tank) == true)
+			tank.rotate();
 		field.deleteObject(shell);
-		//field.deleteObject(wall);
-		field.deleteObject(tank1);
-		field.deleteObject(tank2);
-		
+		if (field.isBarrier(shell) == false)
+			shell.move();
+		field.deleteObject(player);
+		if (player.isWounded(shell) != true)
+			player.control();
+		field.deleteObject(tank);
 		tank.move();
-		tank1.move();
-		tank2.move();
-		shell.move();
+		
+		
 	}
 	getchar();
 	//while (true) {

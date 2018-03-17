@@ -35,6 +35,7 @@ void PlayersTank::control() {
 			vector[0] = 1;
 			vector[1] = 0;
 			posX_++;
+			break;
 		case (72) :   //up
 			vector[0] = 0;
 			vector[1] = -1;
