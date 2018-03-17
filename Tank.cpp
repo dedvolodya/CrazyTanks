@@ -8,6 +8,22 @@ Tank::Tank(int posX, int posY, int helth)
 	vector[1] = 1 - vector[0];
 	helth_ = helth;
 }
+Tank::Tank(const Tank& tank) : 
+	GameObject(tank) {
+	vector[0] = tank.vector[0];
+	vector[1] = tank.vector[1];
+	helth_ = tank.helth_;
+}
+Tank& Tank::operator=(const Tank& tank) {
+	if (this == &tank)
+		return *this;
+
+	GameObject::operator=(tank);
+	vector[0] = tank.vector[0];
+	vector[1] = tank.vector[1];
+	helth_ = tank.helth_;
+	return *this;
+}
 Tank::~Tank()
 {
 }

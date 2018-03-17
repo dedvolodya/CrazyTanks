@@ -21,7 +21,14 @@ Wall::Wall(int posX, int posY, int size, Placing placing) :
 		for (int j = 0; j < sizeX_; j++)
 			body_[i][j] = 'N';
 }
+Wall::Wall(const Wall& wall) : GameObject(wall) {
 
+}
+Wall& Wall::operator=(const Wall& wall) {
+	if (this != &wall)
+		GameObject::operator=(wall);
+	return *this;
+}
 
 Wall::~Wall()
 {

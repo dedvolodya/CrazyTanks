@@ -21,6 +21,7 @@ int main()
 	Shell shell(0, 0, 0, 0);
 	PlayersTank player(45,25);
 	Wall wall(3, 4, 10, Wall::GORIZONTAL);
+	shell = tank1.shoot();
 	while (true) {
 		field.drawObject(wall);
 		field.drawObject(tank1);

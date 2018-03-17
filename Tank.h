@@ -14,5 +14,7 @@ public:
 	void move();
 	void rotate();
 	Tank(int posX, int posY, int helth);
+	Tank(const Tank& tank);
+	Tank& operator=(const Tank& tank);
 	~Tank();
 };

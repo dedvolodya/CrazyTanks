@@ -12,6 +12,8 @@ protected:
 	int sizeY_;
 public:
 	GameObject(int PosX, int PosY, int sizeX, int sizeY);
+	GameObject(const GameObject& obj);
+	GameObject& operator=(const GameObject& obj);
 	~GameObject();
 };
 

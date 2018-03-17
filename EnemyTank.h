@@ -4,7 +4,8 @@ class EnemyTank : public Tank
 {
 public:
 	EnemyTank(int posX, int posY);
-	void draw();
+	EnemyTank(const EnemyTank& tank);
+	EnemyTank& operator=(const EnemyTank& tank);
 	~EnemyTank();
 };
 

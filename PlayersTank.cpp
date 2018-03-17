@@ -10,6 +10,16 @@ PlayersTank::PlayersTank(int posX, int posY)
 	vector[0] = 0;
 	vector[1] = 0;
 }
+PlayersTank::PlayersTank(const PlayersTank& tank) : 
+	Tank(tank) {
+
+}
+PlayersTank& PlayersTank::operator=(const PlayersTank& tank) {
+	if (this == &tank)
+		return *this;
+	Tank::operator=(tank);
+	return *this;
+}
 void PlayersTank::control() {
 	int botton;
 	if (_kbhit()) {
