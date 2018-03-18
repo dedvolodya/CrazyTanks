@@ -4,6 +4,7 @@
 Game::Game() : player(45,24) , field(90,28)
 {
 	points = 0;
+	time = 0;
 	generateWalls();
 	generateTanks();
 	drawWalls();
@@ -15,11 +16,11 @@ Game::~Game()
 void Game::gameLoop() {
 	while (enemyTanks.size() != 0) {
 		field.drawObject(player);
-		
+		drawShells();
 		field.print();
 		printGameStatus();
-
-		std::this_thread::sleep_for(std::chrono::microseconds(10000));
+		time++;
+		std::this_thread::sleep_for(std::chrono::microseconds(100000));
 		processHits();
 		processTanks();
 		field.deleteObject(player);
@@ -63,6 +64,20 @@ void Game::processHits() {
 	field.deleteObject(playerShell);
 	playerShell.move();
 	field.drawObject(playerShell);	
+
+	deleteTanks();
+	auto j = enemyShells.begin();
+	while (j != enemyShells.end()) {
+		field.deleteObject(*j);
+		if (field.isBarrier(*j) == true)
+			j = enemyShells.erase(j);
+		else {
+			j->move();
+			field.drawObject(*j);
+			j++;
+		}
+	}
+	drawTanks();
 }
 void Game::processTanks() {
 	for (auto i = enemyTanks.begin(); i != enemyTanks.end(); i++) {
@@ -73,7 +88,11 @@ void Game::processTanks() {
 			field.deleteObject(*i);
 			i->move();
 			field.drawObject(*i);
-		}			
+		}
+		if (time % 10 == 0) {
+			enemyShells.push_back(i->shoot());
+			enemyShells.back().move();
+		}
 	}
 }
 void Game::drawWalls() {

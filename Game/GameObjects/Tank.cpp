@@ -41,7 +41,9 @@ bool Tank::isWounded(const Shell& shell) {
 		if (shell.vector[1] == 0)
 			return false;
 
-		int distance = shell.posY_ - (posY_ + sizeY_ - 1);
+		int distance = shell.posY_ - posY_;
+		if (distance > 0)
+			distance -= sizeY_ - 1;
 		if (distance > 0 && (-distance > shell.vector[1])) 
 			return true;
 		if (distance < 0 && distance < -shell.vector[1]) 
@@ -52,7 +54,9 @@ bool Tank::isWounded(const Shell& shell) {
 			return false;
 
 		int distance = shell.posX_ - posX_;
-		if (distance > 0 && (-distance < shell.vector[0])) 
+		if (distance > 0)
+			distance -= sizeX_ - 1;
+		if (distance > 0 && (-distance > shell.vector[0])) 
 			return true;
 		if (distance < 0 && distance > -shell.vector[0]) 
 			return true;
