@@ -7,6 +7,7 @@ class PlayersTank :
 {
 public:
 	void rotate() = delete;
+	int getHelth();
 	void control(int bottonn);
 	PlayersTank(int posX, int posY);
 	PlayersTank(const PlayersTank& tank);

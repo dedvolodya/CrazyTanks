@@ -20,8 +20,8 @@ PlayersTank& PlayersTank::operator=(const PlayersTank& tank) {
 	Tank::operator=(tank);
 	return *this;
 }
-void PlayersTank::control(int botton) {
-		switch (botton)
+void PlayersTank::control(int button) {
+		switch (button)
 		{
 		case (75) :  //left
 			vector[0] = -1;
@@ -40,6 +40,9 @@ void PlayersTank::control(int botton) {
 			vector[1] = 1;
 			break;
 		}
+}
+int PlayersTank::getHelth() {
+	return helth_;
 }
 PlayersTank::~PlayersTank()
 {

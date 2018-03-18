@@ -3,6 +3,7 @@
 #include<chrono>
 #include<thread>
 #include<conio.h>
+#include<string>
 #include"GameField.h"
 #include"EnemyTank.h"
 #include"PlayersTank.h"
@@ -17,8 +18,11 @@ public:
 	Game();
 	~Game();
 private:
-	void generateWalls(int n);
-	void generateTanks(int n);
+	void generateWalls();
+	void generateTanks();
+	void processTanks();
+	void processHits();
+	void printGameStatus();
 	void drawWalls();
 	void drawTanks();
 	void drawShells();
@@ -30,5 +34,6 @@ private:
 	Shell playerShell;
 	PlayersTank player;
 	GameField field;
+	int points;
 };
 

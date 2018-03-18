@@ -14,6 +14,7 @@ public:
 	Tank(const Tank& tank);
 	Tank& operator=(const Tank& tank);
 	bool isWounded(const Shell& shell);
+	void substractHelth();
 	~Tank();
 protected:
 	int helth_;

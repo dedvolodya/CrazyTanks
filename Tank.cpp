@@ -1,11 +1,8 @@
 #include "Tank.h"
 
-Tank::Tank(int posX, int posY, int helth) 
+Tank::Tank(int posX, int posY, int helth )
 	: GameObject(posX, posY, 5, 3)
 {
-	srand(time(NULL));
-	vector[0] = rand() % 2;
-	vector[1] = 1 - vector[0];
 	helth_ = helth;
 }
 Tank::Tank(const Tank& tank) : 
@@ -43,28 +40,25 @@ bool Tank::isWounded(const Shell& shell) {
 	if (checkX == true) {
 		if (shell.vector[1] == 0)
 			return false;
-		int distance = shell.posY_ - posY_;
-		if (distance > 0 && distance < -shell.vector[1]) {
-			helth_--;
+
+		int distance = shell.posY_ - (posY_ + sizeY_ - 1);
+		if (distance > 0 && (-distance > shell.vector[1])) 
 			return true;
-		}
-		if (distance < 0 && distance < -shell.vector[1]) {
-			helth_--;
+		if (distance < 0 && distance < -shell.vector[1]) 
 			return true;
-		}
 	}
 	if (checkY == true) {
 		if (shell.vector[0] == 0)
 			return false;
+
 		int distance = shell.posX_ - posX_;
-		if (distance > 0 && distance < -shell.vector[0]) {
-			helth_--;
+		if (distance > 0 && (-distance < shell.vector[0])) 
 			return true;
-		}
-		if (distance < 0 && distance > -shell.vector[0]) {
-			helth_--;
+		if (distance < 0 && distance > -shell.vector[0]) 
 			return true;
-		}
 	}
 	return false;
+}
+void Tank::substractHelth() {
+	helth_--;
 }
