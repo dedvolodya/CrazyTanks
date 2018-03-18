@@ -35,6 +35,6 @@ private:
 	PlayersTank player;
 	GameField field;
 	int points;
-	long int time;
+	long int nFrame;
 };
 

@@ -4,7 +4,7 @@
 Game::Game() : player(45,24) , field(90,28)
 {
 	points = 0;
-	time = 0;
+	nFrame = 0;
 	generateWalls();
 	generateTanks();
 	drawWalls();
@@ -14,13 +14,13 @@ Game::~Game()
 {
 }
 void Game::gameLoop() {
-	while (enemyTanks.size() != 0) {
+	while (enemyTanks.size() != 0 && player.isDead() == false) {
 		field.drawObject(player);
 		drawShells();
 		field.print();
 		printGameStatus();
-		time++;
-		std::this_thread::sleep_for(std::chrono::microseconds(100000));
+		nFrame++;
+		std::this_thread::sleep_for(std::chrono::microseconds(10000));
 		processHits();
 		processTanks();
 		field.deleteObject(player);
@@ -38,8 +38,14 @@ void Game::gameLoop() {
 		}			
 	}
 	system("cls");
-	std::cout << "YOU WON" << std::endl;
-	std::cout << "POINTS : " << std::to_string(points);
+	if (player.isDead() == true) {
+		std::cout << "YOU LOSE" << std::endl;
+		std::cout << "POINTS : " << std::to_string(points);
+	}
+	else {
+		std::cout << "YOU WON" << std::endl;
+		std::cout << "POINTS : " << std::to_string(points);
+	}
 }
 void Game::processHits() {
 	auto i = enemyTanks.begin();
@@ -69,8 +75,14 @@ void Game::processHits() {
 	auto j = enemyShells.begin();
 	while (j != enemyShells.end()) {
 		field.deleteObject(*j);
-		if (field.isBarrier(*j) == true)
+		if (player.isWounded(*j) == true) {
 			j = enemyShells.erase(j);
+			player.substractHelth();
+			break;
+		}
+		if (field.isBarrier(*j) == true) {
+			j = enemyShells.erase(j);
+		}
 		else {
 			j->move();
 			field.drawObject(*j);
@@ -89,7 +101,7 @@ void Game::processTanks() {
 			i->move();
 			field.drawObject(*i);
 		}
-		if (time % 10 == 0) {
+		if (nFrame % 10 == 0) {
 			enemyShells.push_back(i->shoot());
 			enemyShells.back().move();
 		}
