@@ -1,5 +1,4 @@
 #include "EnemyTank.h"
-
 EnemyTank::EnemyTank(int posX, int posY,int directionX, int directionY) 
 	: Tank(posX, posY, 1)
 {

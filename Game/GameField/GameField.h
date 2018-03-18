@@ -1,6 +1,6 @@
 #pragma once
 #include<iostream>
-#include"GameObject.h"
+#include"../GameObjects/GameObject.h"
 
 class GameField
 {

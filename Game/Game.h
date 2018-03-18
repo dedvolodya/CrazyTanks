@@ -4,11 +4,11 @@
 #include<thread>
 #include<conio.h>
 #include<string>
-#include"GameField.h"
-#include"EnemyTank.h"
-#include"PlayersTank.h"
-#include"Wall.h"
-#include"Shell.h"
+#include"GameField/GameField.h"
+#include"GameObjects/EnemyTank.h"
+#include"GameObjects/PlayersTank.h"
+#include"GameObjects/Wall.h"
+#include"GameObjects/Shell.h"
 
 class Game
 {
