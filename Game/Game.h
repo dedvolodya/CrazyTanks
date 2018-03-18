@@ -1,6 +1,7 @@
 #pragma once
 #include<list>
 #include<chrono>
+#include<ctime>
 #include<thread>
 #include<conio.h>
 #include<string>
@@ -36,5 +37,7 @@ private:
 	GameField field;
 	int points;
 	long int nFrame;
+	clock_t gameTime , startTime, endTime;
+
 };
 

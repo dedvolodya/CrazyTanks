@@ -5,6 +5,7 @@ Game::Game() : player(45,24) , field(90,28)
 {
 	points = 0;
 	nFrame = 0;
+	startTime = clock();
 	generateWalls();
 	generateTanks();
 	drawWalls();
@@ -15,12 +16,13 @@ Game::~Game()
 }
 void Game::gameLoop() {
 	while (enemyTanks.size() != 0 && player.isDead() == false) {
+		endTime = clock();
 		field.drawObject(player);
 		drawShells();
 		field.print();
 		printGameStatus();
 		nFrame++;
-		std::this_thread::sleep_for(std::chrono::microseconds(10000));
+		std::this_thread::sleep_for(std::chrono::microseconds(100000));
 		processHits();
 		processTanks();
 		field.deleteObject(player);
@@ -35,7 +37,7 @@ void Game::gameLoop() {
 				if (field.isBarrier(player) == false)
 					player.move();
 			}
-		}			
+		}
 	}
 	system("cls");
 	if (player.isDead() == true) {
@@ -147,9 +149,10 @@ void Game::generateWalls() {
 	walls.push_back(Wall(70, 4, 7, Wall::VERTICAL));
 }
 void Game::printGameStatus() {
-	std::string status = "LIVE : ";
+	std::string status = "LIFE : ";
 	status += std::to_string(player.getHelth());
 	status += "\tPOINTS : ";
 	status += std::to_string(points);
-	std::cout << status;
+	std::cout << status << "\t";
+	std::cout << "TIME : " << (endTime - startTime) / CLOCKS_PER_SEC;
 }
